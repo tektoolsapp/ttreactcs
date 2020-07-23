@@ -79,9 +79,17 @@ app.get('/api/passwords', (req, res) => {
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+
+app.use(express.static(__dirname)); //here is important thing - no static directory, because all static :)
+
+app.get("/*", function(req, res) {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
+
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname+'/client/build/index.html'));
+// });
 
 const port = process.env.PORT || 5000;
 app.listen(port);
