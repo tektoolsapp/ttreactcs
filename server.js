@@ -18,7 +18,9 @@ const generatePassword = require('password-generator');
 const app = express();
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+//app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.use(express.static(__dirname)); //here is important thing - no static directory, because all static :)
 
 // app.post('/api/send', (req, res) => {
     
@@ -80,7 +82,7 @@ app.get('/api/passwords', (req, res) => {
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 
-app.use(express.static(__dirname)); //here is important thing - no static directory, because all static :)
+//app.use(express.static(__dirname)); //here is important thing - no static directory, because all static :)
 
 app.get("/*", function(req, res) {
   res.sendFile(path.join(__dirname, "index.html"));
