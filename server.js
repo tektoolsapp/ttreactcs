@@ -18,7 +18,7 @@ const generatePassword = require('password-generator');
 const app = express();
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../ttreact/client/build')));
+//app.use(express.static(path.join(__dirname, '../ttreact/client/build')));
 
 //app.use(express.static(__dirname)); //here is important thing - no static directory, because all static :)
 
@@ -88,14 +88,14 @@ app.get('/api/passwords', (req, res) => {
 //   res.sendFile(path.join(__dirname, "index.html"));
 // });
 
-app.get("/*", function (req, res) {
-    res.sendFile(path.resolve(__dirname, '../ttreact/client/build', 'index.html'));
-})
+// app.get("/*", function (req, res) {
+//     res.sendFile(path.resolve(__dirname, '../ttreact/client/build', 'index.html'));
+// })
 
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname+'/client/build/index.html'));
-// });
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 const port = process.env.PORT || 5000;
 app.listen(port);
