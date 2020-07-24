@@ -48,7 +48,7 @@ app.use(express.static(path.join(__dirname, '../ttreact/client/build')));
 //             "To": o.to,
 //             "Subject": o.subject,
 //             "TextBody": o.message
-//           }).then(res => {
+//           }).then(res => {tek
 //             console.log(res.To);
 //             console.log(res.SubmittedAt);
 //             console.log(res.Message);
