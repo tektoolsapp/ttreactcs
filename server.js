@@ -18,9 +18,9 @@ const generatePassword = require('password-generator');
 const app = express();
 
 // Serve static files from the React app
-//app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.use(express.static(__dirname)); //here is important thing - no static directory, because all static :)
+//app.use(express.static(__dirname)); //here is important thing - no static directory, because all static :)
 
 // app.post('/api/send', (req, res) => {
     
