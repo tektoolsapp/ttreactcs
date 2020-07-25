@@ -56,17 +56,20 @@ function MyobAuth() {
         grant_type : "authorization_code"
     }
 
-    //axios.post("/api/myob", data, config)
-    axios.post("/api/myob", data)
+    fetch('/api/myob')
+      .then(res => res.json());
 
-    //axios.post("https://secure.myob.com/oauth2/v1/authorize", data, config)
+    // //axios.post("/api/myob", data, config)
+    // axios.post("/api/myob", data)
 
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    // //axios.post("https://secure.myob.com/oauth2/v1/authorize", data, config)
+
+    // .then(function (response) {
+    //   console.log(response);
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
   }
 
   return (
