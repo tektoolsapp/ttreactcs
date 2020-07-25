@@ -25,8 +25,11 @@ app.use(express.static(path.join(__dirname, '../ttreact/client/build')));
 
 const http = require('http');
 
-app.post("api/myob", function(request, response) {
-   proxyRequest = http.request({
+app.post("/api/myob", function(req, res) {
+   
+//res.send({ express: 'FOUND MYOB' });
+
+    proxyRequest = http.request({
       host: 'https://secure.myob.com/oauth2/v1/authorize',
       //port: 80,
       method: 'POST',
@@ -43,6 +46,7 @@ app.post("api/myob", function(request, response) {
 
   //proxyRequest.console.log(response.body);
   proxyRequest.end();
+
 });
 
 

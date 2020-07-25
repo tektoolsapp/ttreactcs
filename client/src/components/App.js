@@ -6,6 +6,7 @@ import Home from '../components/Home';
 import About from '../components/About';
 import MyobAuth from '../components/MyobAuth';
 import ServerTest from '../components/ServerTest';
+import MyobTest from '../components/MyobTest';
 import Header from '../components/Header';
 //import Footer from '../components/Footer';
 
@@ -36,6 +37,7 @@ class App extends React.Component {
                     <Route path="/about" component={About} />
                     <Route path="/auth" component={MyobAuth} onEnter={reload}/>
                     <Route path="/server-test" component={ServerTest}/>
+                    <Route path="/myob-test" component={MyobTest}/>
                     
               </Switch>
           </ThemeProvider>

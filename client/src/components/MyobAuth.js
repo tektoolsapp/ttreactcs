@@ -16,13 +16,17 @@ function MyobAuth() {
   const companyFile = con.API_COMPANY_FILE
   const redirectUrl = con.REDIRECT_URL
 
-  if(code !== null && code !== 'undefined' && code.length > 0){
-    const tokens = getTokens(apiKey, apiSecret, companyFile, redirectUrl)
+  // if(code !== null && code !== 'undefined' && code.length > 0){
+  //   const tokens = getTokens(apiKey, apiSecret, companyFile, redirectUrl)
+  //   console.log("GET TOKENS");
+  //   console.log(tokens);
+  // } else {
+  //   console.log("TRY AGAIN");
+  // } 
+
+  const tokens = getTokens(apiKey, apiSecret, companyFile, redirectUrl)
     console.log("GET TOKENS");
     console.log(tokens);
-  } else {
-    console.log("TRY AGAIN");
-  } 
 
   // getPasswords = () => {
   //   // Get the passwords and store them in state
@@ -56,20 +60,20 @@ function MyobAuth() {
         grant_type : "authorization_code"
     }
 
-    fetch('/api/myob')
-      .then(res => res.json());
+    // fetch('/api/myob')
+    //   .then(res => res.json());
 
     // //axios.post("/api/myob", data, config)
     // axios.post("/api/myob", data)
 
-    // //axios.post("https://secure.myob.com/oauth2/v1/authorize", data, config)
+    axios.post("/api/myob", data)
 
-    // .then(function (response) {
-    //   console.log(response);
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   return (
