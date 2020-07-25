@@ -24,19 +24,43 @@ function MyobAuth() {
     console.log("TRY AGAIN");
   } 
 
+  // getPasswords = () => {
+  //   // Get the passwords and store them in state
+  //   fetch('/api/passwords')
+  //     .then(res => res.json())
+  //     .then(passwords => this.setState({ passwords }));
+  // }
+
+  // axios.post(`http://localhost:5000/people`, params)
+  //   .then(res => {
+  //       console.log(res);
+  //       console.log(res.data);
+  //   })
+
+  // const postHelper = {
+  //   url: "https://secure.myob.com/oauth2/v1/authorize",
+  //   headers: {
+  //     'Content-Type': "application/json"
+  //   }
+  // }
+
   function getTokens(apiKey, apiSecret, companyFile, redirectUrl) {
 
-    const config= { headers:{'Content-Type':"application/json"}}
+    const config = { headers:{'Content-Type':"application/json"}}
     const data={
-            client_id: apiKey,
-            client_secret: apiSecret,
-            scope: companyFile,
-            code: code,
-            redirect_uri: redirectUrl,
-            grant_type : "authorization_code"
-            }
+        client_id: apiKey,
+        client_secret: apiSecret,
+        scope: companyFile,
+        code: code,
+        redirect_uri: redirectUrl,
+        grant_type : "authorization_code"
+    }
 
-    axios.post("https://secure.myob.com/oauth2/v1/authorize", data, config)
+    //axios.post("/api/myob", data, config)
+    axios.post("/api/myob", data)
+
+    //axios.post("https://secure.myob.com/oauth2/v1/authorize", data, config)
+
     .then(function (response) {
       console.log(response);
     })
