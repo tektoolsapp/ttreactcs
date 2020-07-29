@@ -10,9 +10,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+<<<<<<< HEAD
     "password-generator": "^2.3.2"
+=======
+    "password-generator": "^2.3.2",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.9"
+>>>>>>> origin/master
   },
   "homepage": "."
 }

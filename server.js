@@ -1,12 +1,41 @@
 const express = require('express');
 const path = require('path');
-var cors = require('cors');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 const generatePassword = require('password-generator');
 
 const app = express();
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../ttreact/client/build')));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
+
+const rp = require('request-promise-native');
+
+app.post("/api/myob", function(req, res) {
+   
+  const options = {
+      uri: 'https://secure.myob.com/oauth2/v1/authorize',
+      method: 'POST',
+    json: true,
+    body: req.body
+  }
+
+  console.log("OPTIONS: ", options)
+
+  rp(options)
+    .then(parsedBody => {
+        res.send(parsedBody);
+    })
+    .catch(err => {
+        res.send(err);
+    });
+  
+});
+
+//ENDS HERE
 
 // app.post('/api/myob', async (req, res) => {
     
@@ -23,36 +52,18 @@ app.use(express.static(path.join(__dirname, '../ttreact/client/build')));
     
 // });
 
-const http = require('http');
-
+/*
 app.post("/api/myob", function(req, res) {
    
-//res.send({ express: 'FOUND MYOB' });
+    //console.log('Post a MYOB: ' + JSON.stringify(req.body));
 
-    proxyRequest = http.request({
-      host: 'https://secure.myob.com/oauth2/v1/authorize',
-      //port: 80,
-      method: 'POST',
-      //path: '/endpoint/url',
-      headers: {
-        'Content-Type':"application/json"
-      }
-    },
-    function (proxyResponse) {
-      proxyResponse.on('data', function (chunk) {
-        response.send(chunk);
-      });
-    });
+    console.log('Got body:', req.body);
 
-  //proxyRequest.console.log(response.body);
-  proxyRequest.end();
+    res.send({ express: req.body});
 
 });
 
-
-
-
-//app.use(express.static(__dirname)); //here is important thing - no static directory, because all static :)
+*/
 
 // app.post('/api/send', (req, res) => {
     
@@ -112,17 +123,17 @@ app.get('/api/passwords', (req, res) => {
 });
 
 app.get('/api/express_backend', (req, res) => {
-    //res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
+    res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
     console.log(`Sending PASSWORDS`);
     const count = 5;
 
   // Generate some passwords
-  const passwords = Array.from(Array(count).keys()).map(i =>
-    generatePassword(12, false)
-  )
+  //const passwords = Array.from(Array(count).keys()).map(i =>
+    //generatePassword(12, false)
+  //)
 
   // Return them as json
-  res.json(passwords);
+  //res.json(passwords);
 
   console.log(`Sent ${count} passwords`);
 
