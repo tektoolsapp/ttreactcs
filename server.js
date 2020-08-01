@@ -19,8 +19,8 @@ app.post("/api/myob", function(req, res) {
   const options = {
       uri: 'https://secure.myob.com/oauth2/v1/authorize',
       method: 'POST',
-    json: true,
-    body: req.body
+      json: true,
+      body: req.body
   }
 
   console.log("OPTIONS: ", options)
@@ -35,23 +35,6 @@ app.post("/api/myob", function(req, res) {
   
 });
 
-//ENDS HERE
-
-// app.post('/api/myob', async (req, res) => {
-    
-//     //console.log('Post a User: ' + JSON.stringify(req.body));
-    
-//     //const people = new peopleModel(req.body);
-    
-//     try {people
-//       await people.save();
-//       res.send(people);
-//     } catch (err) {
-//       res.status(500).send(err);
-//     }
-    
-// });
-
 /*
 app.post("/api/myob", function(req, res) {
    
@@ -62,7 +45,6 @@ app.post("/api/myob", function(req, res) {
     res.send({ express: req.body});
 
 });
-
 */
 
 // app.post('/api/send', (req, res) => {
