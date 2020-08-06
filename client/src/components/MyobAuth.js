@@ -24,6 +24,12 @@ function MyobAuth() {
   //   console.log("TRY AGAIN");
   // } 
 
+
+
+
+
+
+
   const tokens = getTokens(apiKey, apiSecret, companyFile, redirectUrl)
     console.log("GET TOKENS");
     console.log(tokens);
@@ -66,14 +72,24 @@ function MyobAuth() {
     // //axios.post("/api/myob", data, config)
     // axios.post("/api/myob", data)
 
-    axios.post("/api/myob", data)
+    let res = await axios.post('/api/myob', params);
 
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+        // let res = await axios.post('/api/myob', {
+        //          firstName: 'Fred',
+        //          lastName: 'Flintstone'
+        //       })
+
+        console.log(res.data);
+
+
+    // axios.post("/api/myob", data)
+
+    // .then(function (response) {
+    //   console.log(response);
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
   }
 
   return (
