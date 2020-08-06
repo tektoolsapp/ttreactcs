@@ -91,7 +91,6 @@ function MyobAuth() {
       console.log(error);
     });
 
->>>>>>> origin/master
   }
 
   return (
