@@ -3,6 +3,9 @@ const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const generatePassword = require('password-generator');
+//const con = require('./client/src/config')
+//import con from "./client/src/config"
+//const con = require('./client/src/config')
 
 const app = express();
 
@@ -16,17 +19,24 @@ const rp = require('request-promise-native');
 
 app.post("/api/myob", function(req, res) {
    
-  const options = {
-      uri: 'https://secure.myob.com/oauth2/v1/authorize',
-      method: 'POST',
-      json: true,
-      body: req.body
-  }
+    var queryString = Object.keys(req.body).map((key) => {
+        return encodeURIComponent(key) + '=' + encodeURIComponent(req.body[key])
+    }).join('&'); 
+    
+    const options = {
+        uri: 'https://secure.myob.com/oauth2/v1/authorize?',
+        method: 'POST',
+        //json: true,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: queryString
+    }
 
-  console.log("OPTIONS: ", options)
+    console.log("OPTIONS: ", options)
 
-  rp(options)
-    .then(parsedBody => {
+    rp(options)
+        .then(parsedBody => {
         res.send(parsedBody);
     })
     .catch(err => {
@@ -35,17 +45,41 @@ app.post("/api/myob", function(req, res) {
   
 });
 
-/*
-app.post("/api/myob", function(req, res) {
-   
-    //console.log('Post a MYOB: ' + JSON.stringify(req.body));
+app.get('/api/company', function(req, res) {
+    
+    // `req.get()` is case-insensitive.
+    //const authorization = req.get('authorization');
+    // Or you can use `req.headers`
+    //req.headers.authorization;
 
-    console.log('Got body:', req.body);
+    console.log("HEADERS:") 
+    console.dir(req.headers)
+  
+    const myobAccessToken = req.headers.authorization
+    const cfToken = req.headers.cftoken
+    const apiKey = req.headers.apikey
 
-    res.send({ express: req.body});
+    const options = {
+        method: 'GET',
+        uri: 'https://api.myob.com/accountright/8f9f3d03-4a60-421d-88e9-f1287205e4fe/Company',
+        headers: {
+            'Authorization' : myobAccessToken,
+            'x-myobapi-cftoken' : cfToken,
+            'x-myobapi-key' : apiKey,
+            'x-myobapi-version' : 'v2'
+        },
+        json: true
+    };
+    
+    rp(options)
+        .then(parsedBody => {
+        res.send(parsedBody);
+    })
+    .catch(err => {
+        res.send(err);
+    });
 
-});
-*/
+  });
 
 // app.post('/api/send', (req, res) => {
     
@@ -103,23 +137,6 @@ app.get('/api/passwords', (req, res) => {
 
   console.log(`Sent ${count} passwords`);
 });
-
-app.get('/api/express_backend', (req, res) => {
-    res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
-    console.log(`Sending PASSWORDS`);
-    const count = 5;
-
-  // Generate some passwords
-  //const passwords = Array.from(Array(count).keys()).map(i =>
-    //generatePassword(12, false)
-  //)
-
-  // Return them as json
-  //res.json(passwords);
-
-  console.log(`Sent ${count} passwords`);
-
-  });
 
 const port = process.env.PORT || 5000;
 app.listen(port);
