@@ -59,6 +59,9 @@ const Header = props => {
         <MenuItems>
             <Link to="/myob-test">Myob Test</Link>
         </MenuItems>
+        <MenuItems>
+            <Link to="/kendo-test">Kendo Test</Link>
+        </MenuItems>
       </Box>
 
       <Box

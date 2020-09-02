@@ -62,7 +62,8 @@ function MyobAuth() {
 
   async function getTokens(apiKey, apiSecret, companyFile, redirectUrl) {
 
-    const config = { headers:{'Content-Type':"application/json"}}
+    //const config = { headers:{'Content-Type':"application/json"}}
+    
     const params={
         client_id: apiKey,
         client_secret: apiSecret,

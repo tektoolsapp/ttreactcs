@@ -3,7 +3,7 @@ import axios from 'axios';
 import con from "../config"
 
 import { Button } from "@chakra-ui/core";
-import { stringify } from "querystring";
+//import { stringify } from "querystring";
 
 const apiKey = con.API_KEY
 const apiSecret = con.API_SECRET
@@ -15,7 +15,7 @@ function MyobTest(){
 
     async function postMyob(){
 
-        const config = { headers:{'Content-Type':"application/json"}}
+        //const config = { headers:{'Content-Type':"application/json"}}
         const params={
             client_id: apiKey,
             client_secret: apiSecret,

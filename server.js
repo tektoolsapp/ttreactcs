@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const config = require('config');
 const generatePassword = require('password-generator');
 //const con = require('./client/src/config')
 //import con from "./client/src/config"
@@ -79,6 +81,40 @@ app.get('/api/company', function(req, res) {
         res.send(err);
     });
 
+  });
+
+  const db = config.get('mongoURI');
+
+  mongoose.connect(
+    db, { 
+    useNewUrlParser: true, 
+    useCreateIndex: true, 
+    useFindAndModify: false, 
+    useUnifiedTopology: true 
+  })
+  .then(() => console.log('MongoDB Connected...'))
+  .catch(err => console.log(err));
+
+  const ContactsModel = require('./models/contacts');
+
+  app.get('/api/contacts', async (req, res) => {
+  
+    console.log("SERVER GET CONTACTS")
+    
+    //const contacts = await ContactsModel.find({});
+
+    const contacts = await ContactsModel.find({},
+      {
+        "_id": 0,
+        "firstname": 1
+      })
+  
+    try {
+      res.send(contacts);
+      console.log("CONTACTS", contacts);
+    } catch (err) {
+      res.status(500).send(err);
+    }
   });
 
 // app.post('/api/send', (req, res) => {

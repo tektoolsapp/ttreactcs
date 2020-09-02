@@ -35,11 +35,11 @@ function Home(){
         
         const res = await axios.get('/api/company', {
         headers: {
-            "authorization" : `Bearer ${myobAccessToken}`,
-            'cftoken' : cftoken,
-            'apikey' : apiKey,
-            'apiversion' : 'v2'
-        }
+                "authorization" : `Bearer ${myobAccessToken}`,
+                'cftoken' : cftoken,
+                'apikey' : apiKey,
+                'apiversion' : 'v2'
+            }
         })
         .then((response) => {
             
@@ -47,6 +47,22 @@ function Home(){
             let info = response.data;
             
             console.log("INFO: ", info)
+            
+        }, (error) => {
+        console.log(error);
+        });
+
+    }
+
+    async function getContacts(){
+
+        const res = await axios.get('/api/contacts')
+        .then((response) => {
+            
+            console.log("AXIOS CONTACTS INFO RESP: ", response.data);
+            let info = response.data;
+            
+            console.log("CONTACTS INFO: ", info)
             
         }, (error) => {
         console.log(error);
@@ -62,6 +78,9 @@ function Home(){
           </div>
           <div>
             <Button variantColor="green" onClick={() => getMyobInfo()}>MYOB Info</Button>
+          </div>
+          <div>
+            <Button variantColor="green" onClick={() => getContacts()}>Email Contacts</Button>
           </div>
         </div>
     )
